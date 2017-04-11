@@ -12,13 +12,12 @@ const unicodeRegex = new RegExp(emojione.unicodeRegexp, 'g');
  */
 export default function attachImmutableEntitiesToEmojis(editorState: EditorState): EditorState {
   const contentState = editorState.getCurrentContent();
-  const blocks = contentState.getBlockMap();
+  const currentSelection = editorState.getSelection();
+
   let newContentState = contentState;
 
-  let block = null;
-  if (blocks.length > 0) {
-    block = blocks[blocks.length - 1];
-  }
+  const startKey = currentSelection.getAnchorKey();
+  const block = contentState.getBlockForKey(startKey);
 
   if (block != null) {
     const plainText = block.getText();
