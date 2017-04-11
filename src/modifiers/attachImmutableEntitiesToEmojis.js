@@ -15,7 +15,12 @@ export default function attachImmutableEntitiesToEmojis(editorState: EditorState
   const blocks = contentState.getBlockMap();
   let newContentState = contentState;
 
-  blocks.forEach((block) => {
+  let block = null;
+  if (blocks.length > 0) {
+    block = blocks[blocks.length - 1];
+  }
+
+  if (block != null) {
     const plainText = block.getText();
 
     const addEntityToEmoji = (start, end) => {
@@ -45,7 +50,7 @@ export default function attachImmutableEntitiesToEmojis(editorState: EditorState
     };
 
     findWithRegex(unicodeRegex, block, addEntityToEmoji);
-  });
+  }
 
   if (!newContentState.equals(contentState)) {
     return EditorState.push(
