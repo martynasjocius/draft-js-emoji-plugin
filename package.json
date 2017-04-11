@@ -23,24 +23,39 @@
     "react-component"
   ],
   "scripts": {
-    "clean": "../node_modules/.bin/rimraf lib",
+    "clean": "./node_modules/.bin/rimraf lib",
     "build": "npm run clean && npm run build:js && npm run build:css",
-    "build:js": "WEBPACK_CONFIG=$(pwd)/webpack.config.js BABEL_DISABLE_CACHE=1 BABEL_ENV=production NODE_ENV=production ../node_modules/.bin/babel --out-dir='lib' --ignore='__test__/*' src",
-    "build:css": "node ../scripts/concatCssFiles $(pwd) && ../node_modules/.bin/rimraf lib-css",
+    "build:js": "WEBPACK_CONFIG=$(pwd)/webpack.config.js BABEL_DISABLE_CACHE=1 BABEL_ENV=production NODE_ENV=production ./node_modules/.bin/babel --out-dir='lib' --ignore='__test__/*' src",
+    "build:css": "node ../scripts/concatCssFiles $(pwd) && ./node_modules/.bin/rimraf lib-css",
     "prepublish": "npm run build"
   },
   "license": "MIT",
   "dependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-webpack-loaders": "^0.9.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^0.28.0",
     "decorate-component-with-props": "^1.0.2",
-    "draft-js": ">=0.9.1",
-    "emojione": "^2.2.6",
+    "draft-js": "^0.10.0",
+    "emojione": "^2.2.7",
+    "extract-text-webpack-plugin": "^2.1.0",
     "find-with-regex": "^1.0.2",
-    "immutable": "~3.7.4",
+    "immutable": "^3.7.6",
+    "loader-utils": "^1.1.0",
     "lodash.keys": "^4.2.0",
+    "postcss-loader": "^1.3.3",
+    "react": "^15.5.3",
+    "rimraf": "^2.6.1",
+    "style-loader": "^0.16.1",
     "union-class-names": "^1.0.0"
   },
   "peerDependencies": {
     "react": "^15.0.0",
     "react-dom": "^15.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^2.3.3"
   }
 }
